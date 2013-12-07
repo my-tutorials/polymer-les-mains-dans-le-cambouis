@@ -1,0 +1,32 @@
+<polymer-element name="hello-john-doe">
+  <template>
+    <h1 id="hello">Hello {{name}}</h1>
+    <input value="{{name}}">
+    <button on-click="{{clickMe}}">Click Me!</button>
+  </template>
+  <script>
+    Polymer("hello-john-doe",{
+      ready: function(){
+        this.name = "John Doe";
+      },
+      nameChanged : function() {
+        if(this.name != "John Doe") {
+          this.$.hello.style.color = "red";
+        } else {
+          this.$.hello.style.color = "green";
+        }
+      },
+      clickMe : function() {
+        this.$.hello.innerHTML="CLICKED";
+
+        this.asyncFire(
+          'polymer-signal',
+          {
+            name : "newbuddy",
+            data : { name : this.name }
+          }
+        );
+      }
+    });
+  </script>
+</polymer-element>

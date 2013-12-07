@@ -1,0 +1,29 @@
+<polymer-element name="buddies-list">
+  <template>
+    <polymer-signals on-polymer-signal-newbuddy="{{onNewBuddySignal}}"></polymer-signals>
+    <h2>{{title}}</h2>
+    <ul>
+      <template repeat="{{buddies}}">
+        <li>{{name}}</li>
+      </template>
+    </ul>
+  </template>
+
+  <script>
+    Polymer("buddies-list",{
+      ready: function(){
+        console.log("Title is ", this.title);
+        this.buddies = [
+          {name:"Bob Morane"},
+          {name:"Doctor No"},
+          {name:"Fox Mulder"},
+          {name:"Lady Penelope"}
+        ];
+      },
+      onNewBuddySignal : function(e, data, sender) {
+        this.buddies.push(data)
+        console.log("Sender : ", sender)
+      }
+    });
+  </script>
+</polymer-element>

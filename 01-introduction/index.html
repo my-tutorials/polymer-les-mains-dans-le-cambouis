@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>01-introduction</title>
+  <!-- Load Polymer -->
+  <script src="bower_components/platform/platform.js"></script>
+  <script src="bower_components/polymer/polymer.js"></script>
+
+  <!-- polymer elements -->
+  <link rel="import"
+        href="bower_components/polymer-elements/polymer-signals/polymer-signals.html">
+
+
+  <link rel="import" href="components/hello-john-doe.html">
+  <link rel="import" href="components/buddies-list.html">
 </head>
 <body>
-
+  <hello-john-doe></hello-john-doe>
+  <hr>
+  <buddies-list title="Buddies List"></buddies-list>
 </body>
 </html>
