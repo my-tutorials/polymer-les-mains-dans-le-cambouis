@@ -1,0 +1,44 @@
+<polymer-element name="hello-john-doe">
+  <template>
+    <polymer-ajax id="xhr" handleAs="json" method="POST" url="buddies"
+                  on-polymer-response="{{onReceive}}"
+                  on-polymer-error="{{onError}}"
+                  on-polymer-complete="{{onComplete}}">
+    </polymer-ajax>
+
+    <h1 id="hello">Hello {{name}}</h1>
+    <input value="{{name}}">
+    <button on-click="{{clickMe}}">Click Me!</button>
+  </template>
+  <script>
+    Polymer("hello-john-doe",{
+      ready: function(){
+        this.name = "John Doe";
+      },
+      nameChanged : function() {
+        if(this.name != "John Doe") {
+          this.$.hello.style.color = "red";
+        } else {
+          this.$.hello.style.color = "green";
+        }
+      },
+      clickMe : function() {
+        this.$.hello.innerHTML="CLICKED";
+
+        this.$.xhr.xhrArgs = {
+          headers: { "Content-Type": "application/json"},
+          body: JSON.stringify({ name : this.name })
+        };
+
+        this.$.xhr.go();
+      },
+      onReceive: function(response) {
+        this.asyncFire(
+          'polymer-signal', { name : "newbuddy" }
+        );
+      },
+      onError: function(error) { /*foo*/ },
+      onComplete: function(data) { /*foo*/ }
+    });
+  </script>
+</polymer-element>

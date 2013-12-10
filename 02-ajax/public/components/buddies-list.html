@@ -1,0 +1,35 @@
+<polymer-element name="buddies-list">
+
+  <template>
+    <polymer-ajax id="xhr" auto handleAs="json" method="GET" url="buddies"
+                  on-polymer-response="{{onReceive}}"
+                  on-polymer-error="{{onError}}"
+                  on-polymer-complete="{{onComplete}}">
+    </polymer-ajax>
+
+    <polymer-signals on-polymer-signal-newbuddy="{{onNewBuddySignal}}"></polymer-signals>
+    <h2>{{title}}</h2>
+    <ul>
+      <template repeat="{{buddies}}">
+        <li>{{name}}</li>
+      </template>
+    </ul>
+  </template>
+
+  <script>
+    Polymer("buddies-list",{
+      ready: function(){
+
+      },
+      onReceive: function(response) {
+        this.buddies = response.detail.response;
+      },
+      onError: function(error) { /*foo*/ },
+      onComplete: function(data) { /*foo*/ },
+
+      onNewBuddySignal : function(e, data, sender) {
+        this.$.xhr.go();
+      }
+    });
+  </script>
+</polymer-element>
