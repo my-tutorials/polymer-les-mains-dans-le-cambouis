@@ -19,7 +19,7 @@
   <script>
     Polymer("buddies-list",{
       ready: function(){
-
+        this.$.xhr.url = this.getAttribute("url");
       },
       onReceive: function(response) {
         this.buddies = response.detail.response;

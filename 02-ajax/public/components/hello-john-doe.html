@@ -1,6 +1,6 @@
 <polymer-element name="hello-john-doe">
   <template>
-    <polymer-ajax id="xhr" handleAs="json" method="POST" url="buddies"
+    <polymer-ajax id="xhr" handleAs="json" method="POST"
                   on-polymer-response="{{onReceive}}"
                   on-polymer-error="{{onError}}"
                   on-polymer-complete="{{onComplete}}">
@@ -14,6 +14,7 @@
     Polymer("hello-john-doe",{
       ready: function(){
         this.name = "John Doe";
+        this.$.xhr.url = this.getAttribute("url");
       },
       nameChanged : function() {
         if(this.name != "John Doe") {
